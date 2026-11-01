@@ -1,0 +1,17 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        l = res = 0
+        count = [0] * 26
+
+        for r in range(len(s)):
+            count[ord(s[r]) - ord('A')] += 1
+            mostFreq = max(count)
+            window = r - l + 1
+            
+            if (window - mostFreq) > k:
+                count[ord(s[l]) - ord('A')] -= 1
+                l += 1
+            
+            res = max(res, r - l + 1)
+        
+        return res
